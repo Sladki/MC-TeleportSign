@@ -1,0 +1,10 @@
+    name: TeleportSign
+    main: sladki.tpsign.Teleport
+    version: 1.0
+    permissions:
+        teleport.sign.create:
+            default: op
+    commands:
+        teleportreloadconfig:    
+            description: Reloads config of TeleportSign
+            usage: /<command>           

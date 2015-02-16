@@ -1,0 +1,15 @@
+#MIN_DISTANCE must be lesser than MAX_X or MAX_Z
+#All values must be not negative
+Teleport:
+    MAX_X: 1000
+    MAX_Z: 1000
+    MIN_HEIGHT: 64
+    MAX_HEIGHT: 140
+    MIN_DISTANCE: 100
+    BannedBiomes:
+        - OCEAN
+        - RIVER
+        - DEEP_OCEAN
+    BannedBlocks:
+        - CACTUS
+    DEBUG: false
