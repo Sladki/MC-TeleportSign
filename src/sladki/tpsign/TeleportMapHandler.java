@@ -7,11 +7,9 @@ import org.bukkit.entity.Player;
 
 public class TeleportMapHandler {
 
-	private static Teleport plugin;
 	private static Map playerMap = new HashMap();
 
 	public TeleportMapHandler(Teleport instance) {
-		plugin = instance;
 	}
 
 	public static void playerAdd(Player player) {

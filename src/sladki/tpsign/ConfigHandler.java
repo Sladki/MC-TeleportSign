@@ -4,7 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ConfigHandler {
 
-	private final Teleport plugin;
+	private static Teleport plugin;
 
 	public ConfigHandler(Teleport instance) {
 		plugin = instance;
@@ -12,11 +12,11 @@ public class ConfigHandler {
 		plugin.saveDefaultConfig();
 	}
 
-	public void ReloadConfig() {
+	public static void reloadConfig() {
 		plugin.reloadConfig();
 	}
 
-	public Object get(String value) {
+	public static Object get(String value) {
 		FileConfiguration config = plugin.getConfig();
 		return config.get("Teleport." + value);
 	}

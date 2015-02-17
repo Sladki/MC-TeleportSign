@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class TeleportHandler {
 
-	private Teleport plugin;
+	private final Teleport plugin;
 
 	private Player player = null;
 	private Location tpLocation = null;
@@ -66,15 +66,15 @@ public class TeleportHandler {
 	// If new location is not suitable, trying to get a new one.
 	// Returns true if success
 	protected boolean setLocation(int x, int z) {
-		int minDistance = (int) plugin.configHandler.get("MIN_DISTANCE");
-		List bannedBiomes = (List) plugin.configHandler.get("BannedBiomes");
-		List bannedBlocks = (List) plugin.configHandler.get("BannedBlocks");
+		int minDistance = (int) ConfigHandler.get("MIN_DISTANCE");
+		List bannedBiomes = (List) ConfigHandler.get("BannedBiomes");
+		List bannedBlocks = (List) ConfigHandler.get("BannedBlocks");
 		int counter = 0;
 
 		Random random = new Random();
 
-		if (minDistance >= (int) plugin.configHandler.get("MAX_X")
-				|| minDistance >= (int) plugin.configHandler.get("MAX_Z")) {
+		if (minDistance >= (int) ConfigHandler.get("MAX_X")
+				|| minDistance >= (int) ConfigHandler.get("MAX_Z")) {
 			plugin.getLogger()
 					.info("MIN_DISTANCE must be lesser than MAX_X or MAX_Z. Change the values in the config.");
 			return false;
@@ -90,11 +90,11 @@ public class TeleportHandler {
 			}
 
 			int newZ = 0;
-			int newX = random.nextInt((int) plugin.configHandler.get("MAX_X") + 1);
+			int newX = random.nextInt((int) ConfigHandler.get("MAX_X") + 1);
 			if (newX <= minDistance) {
-				newZ = random.nextInt((int) plugin.configHandler.get("MAX_Z") - minDistance) + minDistance;
+				newZ = random.nextInt((int) ConfigHandler.get("MAX_Z") - minDistance) + minDistance;
 			} else {
-				newZ = random.nextInt((int) plugin.configHandler.get("MAX_Z") + 1);
+				newZ = random.nextInt((int) ConfigHandler.get("MAX_Z") + 1);
 			}
 
 			boolean upperHalf = random.nextBoolean();
@@ -111,12 +111,12 @@ public class TeleportHandler {
 
 			int newY = tpLocation.getWorld().getHighestBlockYAt(newX, newZ);
 
-			if ((Boolean) plugin.configHandler.get("DEBUG")) {
+			if ((Boolean) ConfigHandler.get("DEBUG")) {
 				plugin.getLogger().info("New location X: " + newX + " Y: " + newY + " Z: " + newZ);
 			}
 
-			if (newY < (int) plugin.configHandler.get("MIN_HEIGHT")
-					|| newY > (int) plugin.configHandler.get("MAX_HEIGHT")) {
+			if (newY < (int) ConfigHandler.get("MIN_HEIGHT")
+					|| newY > (int) ConfigHandler.get("MAX_HEIGHT")) {
 				continue;
 			}
 
@@ -126,7 +126,7 @@ public class TeleportHandler {
 
 			biome = tpLocation.getBlock().getBiome().name();
 			if (bannedBiomes.contains(biome)) {
-				if ((Boolean) plugin.configHandler.get("DEBUG")) {
+				if ((Boolean) ConfigHandler.get("DEBUG")) {
 					plugin.getLogger().info("Biome: " + biome);
 				}
 				continue;
@@ -135,13 +135,13 @@ public class TeleportHandler {
 			String block = tpLocation.getWorld().getHighestBlockAt(newX, newZ).getRelative(BlockFace.DOWN).getType()
 					.name();
 			if (bannedBlocks.contains(block)) {
-				if ((Boolean) plugin.configHandler.get("DEBUG")) {
+				if ((Boolean) ConfigHandler.get("DEBUG")) {
 					plugin.getLogger().info("Block name: " + block);
 				}
 				continue;
 			}
 
-			if ((Boolean) plugin.configHandler.get("DEBUG")) {
+			if ((Boolean) ConfigHandler.get("DEBUG")) {
 				plugin.getLogger().info("Teleport location has set with " + counter + " attempts.");
 				plugin.getLogger().info("Block: "+block+" biome: "+biome);
 			}
