@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class TeleportListener implements Listener {
 
 	private final Teleport plugin;
+	private long lastUsedTime;
 
 	public TeleportListener(Teleport instance) {
 		plugin = instance;
@@ -60,8 +61,17 @@ public class TeleportListener implements Listener {
 				if (TeleportMapHandler.playerCheck(player)) {
 					return;
 				}
+				
+				if((int)ConfigHandler.get("COOLDOWN") > 0) {
+					int cooldownSecondsLeft = -(int)((System.currentTimeMillis() - lastUsedTime - (int)ConfigHandler.get("COOLDOWN") * 1000) * 0.001);
+					if(cooldownSecondsLeft > 0) {
+						player.sendMessage(ChatColor.GRAY + "Please wait " + cooldownSecondsLeft + " sec before you'll be able to teleport");
+						return;
+					}
+					lastUsedTime = System.currentTimeMillis();
+				}
 
-				player.sendMessage(ChatColor.GRAY + "Teleporting...");
+				player.sendMessage(ChatColor.GREEN + "Teleporting...");
 				TeleportMapHandler.playerAdd(player);
 				new TeleportHandler(plugin, player, block.getWorld(), block.getX(),
 						block.getZ());

@@ -1,6 +1,7 @@
 #MIN_DISTANCE must be lesser than MAX_X or MAX_Z
 #All values must be not negative
 Teleport:
+    COOLDOWN: 0
     MAX_X: 1000
     MAX_Z: 1000
     MIN_HEIGHT: 64

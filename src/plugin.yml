@@ -1,6 +1,6 @@
     name: TeleportSign
     main: sladki.tpsign.Teleport
-    version: 1.0
+    version: 1.01
     permissions:
         teleport.sign.create:
             default: op

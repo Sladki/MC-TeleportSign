@@ -44,8 +44,8 @@ public class TeleportHandler {
 					if (player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
 						if (player.getLocation().getBlock().getRelative(BlockFace.UP).getType() == Material.AIR) {
 							plugin.getLogger().info(
-									player.getDisplayName() + " has teleported.\n			X:" + tpLocation.getX() + " Y:"
-											+ tpLocation.getY() + " Z:" + tpLocation.getZ() + "\n			Attempts: "
+									player.getDisplayName() + " has teleported. X:" + tpLocation.getX() + " Y:"
+											+ tpLocation.getY() + " Z:" + tpLocation.getZ() + " Attempts: "
 											+ attempts + " Biome:" + biome);
 							this.cancel();
 						}
